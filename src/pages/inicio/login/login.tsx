@@ -11,6 +11,8 @@ import { propsStack } from '../../../routes/stack/models/model';
 // import {useAuth} from '../../../context/AuthContext';
 
 const Login = () => {
+  const video = require('../../../../assets/fundofinal.mp4');
+  const logo = require('../../../../assets/BICO-3.png');
   const navigation = useNavigation<propsStack>();
   // const {Login} = useAuth();
 
@@ -36,14 +38,14 @@ const Login = () => {
         {props => (
           <View style={styles.image}>
             <Video
-              source={require('../../../../assets/fundofinal.mp4')}
+              source={video}
               style={styles.video}
               resizeMode="cover"
               repeat={true}
               muted={true}
             />
             <Image
-              source={require('../../../../assets/BICO-3.png')}
+              source={logo}
               style={styles.logo}
             />
             <View style={styles.formLogin}>
@@ -102,7 +104,7 @@ const Login = () => {
               </TouchableOpacity>
 
               <Text style={styles.labelCadastro}>
-                Ainda não possui cadastro? Crie um
+                Ainda não possui cadastro? Crie um 
                 <Text onPress={handleSubmitCadastro} style={styles.labelBold}>
                   {' '}
                   clicando aqui

@@ -11,6 +11,7 @@ import { propsStack } from '../../../routes/stack/models/model';
 import { useNavigation } from '@react-navigation/native';
 
 export default function ({ }) {
+  const logo = require('../../../../assets/BICO-3.png');
   const navigation = useNavigation<propsStack>()
   const [Dados, setDados] = useState('');
 
@@ -39,7 +40,7 @@ export default function ({ }) {
           <View style={styles.image}>
 
             <Image
-              source={require('../../../../assets/BICO-3.png')}
+              source={logo}
               style={styles.logo}
             />
 
