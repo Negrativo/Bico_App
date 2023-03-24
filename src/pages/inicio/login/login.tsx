@@ -3,17 +3,19 @@ import React from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
 import Video from 'react-native-video';
 import {Formik} from 'formik';
-import styles from './styleLogin';
+import styles from './StyleLogin';
 
 import ValidateLogin from '../../../components/schema/LoginSchema';
+import { useNavigation } from '@react-navigation/native';
+import { propsStack } from '../../../routes/stack/models/model';
 // import {useAuth} from '../../../context/AuthContext';
 
 const Login = () => {
-  // const navigation = useNavigation<propsStack>();
+  const navigation = useNavigation<propsStack>();
   // const {Login} = useAuth();
 
   async function handleSubmitCadastro() {
-    // navigation.navigate('Cadastro');
+    navigation.navigate('CadastroInicial');
   }
 
   // function handleLogin(email: string, senha: string) {
