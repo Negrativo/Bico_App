@@ -1,11 +1,11 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
-import {View, Text, TextInput, TouchableOpacity} from 'react-native';
+import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
+import Video from 'react-native-video';
 import {Formik} from 'formik';
 import styles from './styleLogin';
 
 import ValidateLogin from '../../../components/schema/LoginSchema';
-// import ico from '../../../../assets/icon.png';
-
 // import {useAuth} from '../../../context/AuthContext';
 
 const Login = () => {
@@ -20,18 +20,6 @@ const Login = () => {
   //   Login(email, senha);
   // }
 
-  /*
-          <Video
-              source={videoFundo}
-              style={styles.video}
-              isLooping={true}
-              isMuted
-              onTouchStart
-              shouldPlay={true}
-              resizeMode="cover"
-            />
-  */
-
   return (
     <View style={styles.container}>
       <Formik
@@ -45,6 +33,17 @@ const Login = () => {
         }}>
         {props => (
           <View style={styles.image}>
+            <Video
+              source={require('../../../../assets/fundofinal.mp4')}
+              style={styles.video}
+              resizeMode="cover"
+              repeat={true}
+              muted={true}
+            />
+            <Image
+              source={require('../../../../assets/BICO-3.png')}
+              style={styles.logo}
+            />
             <View style={styles.formLogin}>
               <Text style={styles.label}>LOGIN</Text>
               <View style={styles.form}>
