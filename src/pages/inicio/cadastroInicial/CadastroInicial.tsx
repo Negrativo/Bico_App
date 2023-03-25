@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, ImageBackground } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
 import { Formik } from 'formik';
 
 import api from '../../../service/api';
@@ -12,7 +12,7 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function ({ }) {
   const logo = require('../../../../assets/BICO-3.png');
-  const navigation = useNavigation<propsStack>()
+  const navigation = useNavigation<propsStack>();
   const [Dados, setDados] = useState('');
 
   return (
@@ -22,18 +22,19 @@ export default function ({ }) {
         initialValues={{ nome: '', email: '', senha: '', senha2: '', error: '' }}
         validationSchema={ValidateCadastro}
         onSubmit={(values, { setErrors }) => {
-          let nome = values.nome;
-          let email = values.email;
-          let senha = values.senha;
-          api.post('/login', {
-            email, senha
-          })
-            .then(res => {
-              console.log('Usuario já cadastrado');
-            })
-            .catch(error => {
-              // navigation.navigate('Finalização de cadastro', { nome, email, senha });
-            });
+          const nome = values.nome;
+          const email = values.email;
+          const senha = values.senha;
+          navigation.navigate('CadastroFinal', { nome: nome, email: email, senha: senha });
+          // api.post('/login', {
+          //   email, senha
+          // })
+          //   .then(res => {
+          //     console.log('Usuario já cadastrado');
+          //   })
+          //   .catch(error => {
+          //     navigation.navigate('CadastroFinal', { nome: nome, email: email, senha: senha });
+          //   });
         }}
       >
         {(props) => (

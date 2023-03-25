@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
 
   container: {
     backgroundColor: '#FCFCFC',
-    flex: 2,
+    flex: 1,
     justifyContent: 'center',
   },
 
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   },
 
   labelCadastro: {
-    fontSize: 15,
+    fontSize: 12,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 10,
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   },
 
   labelBold: {
-    fontSize: 15,
+    fontSize: 10,
     justifyContent: 'center',
     alignItems: 'center',
     fontWeight: 'bold',

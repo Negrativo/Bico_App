@@ -100,7 +100,7 @@ const Login = () => {
                 </TouchableOpacity>
               </View>
               <TouchableOpacity style={styles.labelBorder}>
-                <Text style={styles.labelEntrar}>Esqueceu sua senha?</Text>
+                <Text style={styles.labelEntrar}>Esqueceu sua senha? Clique Aqui</Text>
               </TouchableOpacity>
 
               <Text style={styles.labelCadastro}>

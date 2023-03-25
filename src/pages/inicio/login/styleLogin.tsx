@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   logo: {
-    marginBottom: 50,
+    marginBottom: 10,
     marginTop: 10,
     width: 200,
     height: 200,
