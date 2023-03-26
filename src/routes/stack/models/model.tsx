@@ -1,6 +1,7 @@
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 export type propsNavigationStack = {
+  TelaInicial: undefined;
   Login: undefined;
   CadastroInicial: undefined;
   CadastroFinal: CadastroFinalParams;

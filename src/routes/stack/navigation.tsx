@@ -5,12 +5,14 @@ import {propsNavigationStack} from './models/model';
 import Login from '../../pages/inicio/login/Login';
 import CadastroInicial from '../../pages/inicio/cadastroInicial/CadastroInicial';
 import CadastroFinal from '../../pages/inicio/cadastroFinal/CadastroFinal';
+import TelaInicial from '../../pages/inicio/telaInicial/TelaInicial';
 
 const {Navigator, Screen} = createNativeStackNavigator<propsNavigationStack>();
 
 export default function () {
   return (
     <Navigator screenOptions={{headerShown: false}}>
+      <Screen name="TelaInicial" component={TelaInicial} />
       <Screen name="Login" component={Login} />
       <Screen name="CadastroInicial" component={CadastroInicial} />
       <Screen name="CadastroFinal" component={CadastroFinal} />

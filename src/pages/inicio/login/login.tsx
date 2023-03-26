@@ -8,21 +8,20 @@ import styles from './StyleLogin';
 import ValidateLogin from '../../../components/schema/LoginSchema';
 import { useNavigation } from '@react-navigation/native';
 import { propsStack } from '../../../routes/stack/models/model';
-// import {useAuth} from '../../../context/AuthContext';
+import { login } from '../../../service/loginService/LoginService';
 
 const Login = () => {
   const video = require('../../../../assets/fundofinal.mp4');
   const logo = require('../../../../assets/BICO-3.png');
   const navigation = useNavigation<propsStack>();
-  // const {Login} = useAuth();
 
   async function handleSubmitCadastro() {
     navigation.navigate('CadastroInicial');
   }
 
-  // function handleLogin(email: string, senha: string) {
-  //   Login(email, senha);
-  // }
+  function handleLogin(email: string, senha: string) {
+    login(email, senha);
+  }
 
   return (
     <View style={styles.container}>

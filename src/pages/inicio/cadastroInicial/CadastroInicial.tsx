@@ -9,6 +9,7 @@ import ValidateCadastro from '../../../components/schema/CadastroSchema';
 import styles from './StyleCadastroInicial';
 import { propsStack } from '../../../routes/stack/models/model';
 import { useNavigation } from '@react-navigation/native';
+import { login } from '../../../service/loginService/LoginService';
 
 export default function ({ }) {
   const logo = require('../../../../assets/BICO-3.png');
@@ -25,16 +26,12 @@ export default function ({ }) {
           const nome = values.nome;
           const email = values.email;
           const senha = values.senha;
-          navigation.navigate('CadastroFinal', { nome: nome, email: email, senha: senha });
-          // api.post('/login', {
-          //   email, senha
-          // })
-          //   .then(res => {
-          //     console.log('Usuario já cadastrado');
-          //   })
-          //   .catch(error => {
-          //     navigation.navigate('CadastroFinal', { nome: nome, email: email, senha: senha });
-          //   });
+          const usuario = login(email, senha);
+          if (!!usuario) {
+            console.log('Usuario já cadastrado');
+          } else {
+            navigation.navigate('CadastroFinal', { nome: nome, email: email, senha: senha });
+          };
         }}
       >
         {(props) => (
