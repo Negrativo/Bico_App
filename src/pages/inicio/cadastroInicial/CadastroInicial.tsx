@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
+import Modal from 'react-native-modal';
 import { Formik } from 'formik';
 
 import api from '../../../service/api';
@@ -10,27 +11,51 @@ import styles from './StyleCadastroInicial';
 import { propsStack } from '../../../routes/stack/models/model';
 import { useNavigation } from '@react-navigation/native';
 import { login } from '../../../service/loginService/LoginService';
+import { Button } from 'react-native';
+import { UsuarioByIdDTO } from '../../../dtos/UsuarioDTO';
 
 export default function ({ }) {
   const logo = require('../../../../assets/BICO-3.png');
   const navigation = useNavigation<propsStack>();
-  const [Dados, setDados] = useState('');
+  const [mensagemModal, setMensagemModal] = useState('');
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const showModal = () => {
+    setModalVisible(true);
+  };
+
+  const hideModal = () => {
+    setModalVisible(false);
+  };
+
+
+  function cadastrarUsuario(nome: string, email: string, telefone: string, senha: string) {
+
+    throw new Error('Function not implemented.');
+  }
 
   return (
     <View style={styles.container}>
 
       <Formik
-        initialValues={{ nome: '', email: '', senha: '', senha2: '', error: '' }}
+        initialValues={{ nome: '', email: '', senha: '', senha2: '', telefone: '', error: '' }}
         validationSchema={ValidateCadastro}
         onSubmit={(values, { setErrors }) => {
           const nome = values.nome;
           const email = values.email;
+          const telefone = values.telefone;
           const senha = values.senha;
-          const usuario = login(email, senha);
-          if (!!usuario) {
+          const usuario = login(email, senha) as unknown as UsuarioByIdDTO;
+          console.log(usuario)
+          if (!!usuario.nome) {
             console.log('Usuario já cadastrado');
+            setMensagemModal('Usuário já cadastrado');
+            showModal()
           } else {
-            navigation.navigate('CadastroFinal', { nome: nome, email: email, senha: senha });
+            cadastrarUsuario(nome, email, telefone, senha);
+            setMensagemModal('Cadastrado com sucesso');
+            showModal();
+            navigation.navigate('Login');
           };
         }}
       >
@@ -41,6 +66,13 @@ export default function ({ }) {
               source={logo}
               style={styles.logo}
             />
+
+            <Modal isVisible={isModalVisible}>
+              <View>
+                <Text>{mensagemModal}</Text>
+                <Button title="Fechar" onPress={hideModal} />
+              </View>
+            </Modal>
 
             <View style={styles.form} >
               <Text style={styles.label}>NOME</Text>

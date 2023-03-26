@@ -16,10 +16,6 @@ const Login = () => {
     navigation.navigate('Login');
   }
 
-  function navigateCadastro() {
-    navigation.navigate('CadastroInicial');
-  }
-
   function navigateEscolhaServico() {
     navigation.navigate('CadastroInicial');
   }
