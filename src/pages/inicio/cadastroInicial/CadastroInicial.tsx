@@ -2,17 +2,15 @@ import React, { useState } from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal';
 import { Formik } from 'formik';
-
-import api from '../../../service/api';
-
-import ValidateCadastro from '../../../components/schema/CadastroSchema';
-
 import styles from './StyleCadastroInicial';
 import { propsStack } from '../../../routes/stack/models/model';
 import { useNavigation } from '@react-navigation/native';
-import { login } from '../../../service/loginService/LoginService';
+import { verificarUsuarioExistente } from '../../../service/loginService/LoginService';
 import { Button } from 'react-native';
-import { UsuarioByIdDTO } from '../../../dtos/UsuarioDTO';
+import { cadastrarUsuario } from '../../../service/usuarioService/UsuarioService';
+import MaskInput, { Masks } from 'react-native-mask-input';
+
+import ValidateCadastro from '../../../components/schema/CadastroSchema';
 
 export default function ({ }) {
   const logo = require('../../../../assets/BICO-3.png');
@@ -28,51 +26,46 @@ export default function ({ }) {
     setModalVisible(false);
   };
 
-
-  function cadastrarUsuario(nome: string, email: string, telefone: string, senha: string) {
-
-    throw new Error('Function not implemented.');
-  }
-
   return (
     <View style={styles.container}>
-
       <Formik
         initialValues={{ nome: '', email: '', senha: '', senha2: '', telefone: '', error: '' }}
         validationSchema={ValidateCadastro}
-        onSubmit={(values, { setErrors }) => {
+        onSubmit={async (values, { setErrors }) => {
           const nome = values.nome;
           const email = values.email;
           const telefone = values.telefone;
           const senha = values.senha;
-          const usuario = login(email, senha) as unknown as UsuarioByIdDTO;
-          console.log(usuario)
-          if (!!usuario.nome) {
-            console.log('Usuario já cadastrado');
-            setMensagemModal('Usuário já cadastrado');
-            showModal()
-          } else {
-            cadastrarUsuario(nome, email, telefone, senha);
-            setMensagemModal('Cadastrado com sucesso');
-            showModal();
-            navigation.navigate('Login');
-          };
+          if (email.length > 0 && senha.length > 0) {
+            const usuarioExistente: Promise<Boolean> = verificarUsuarioExistente(email);
+            if (await usuarioExistente) {
+              console.log('Usuario já cadastrado');
+              setMensagemModal('Email já cadastrado');
+              showModal()
+            } else if (!usuarioExistente) {
+              cadastrarUsuario(nome, email, telefone, senha);
+              setMensagemModal('Cadastrado com sucesso');
+              showModal();
+              navigation.navigate('Login');
+            };
+          }
+
         }}
       >
         {(props) => (
           <View style={styles.image}>
 
-            <Image
-              source={logo}
-              style={styles.logo}
-            />
-
             <Modal isVisible={isModalVisible}>
-              <View>
+              <View style={styles.modal}>
                 <Text>{mensagemModal}</Text>
                 <Button title="Fechar" onPress={hideModal} />
               </View>
             </Modal>
+
+            <Image
+              source={logo}
+              style={styles.logo}
+            />
 
             <View style={styles.form} >
               <Text style={styles.label}>NOME</Text>
@@ -109,6 +102,20 @@ export default function ({ }) {
               {props.dirty && props.errors.email && <Text style={styles.errors}>{props.errors.email}</Text>}
             </View>
 
+            <View style={styles.form} >
+              <Text style={styles.label}>Numero para contato profissional</Text>
+              <MaskInput
+                style={styles.input}
+                value={props.values.telefone}
+                onChangeText={(masked, unmasked, obfuscated) => props.setFieldValue('telefone', unmasked)}
+                mask={Masks.BRL_PHONE}
+                textAlign="center"
+                textContentType='telephoneNumber'
+                placeholder="Telefone"
+                placeholderTextColor="#FFFFFF"
+                autoComplete='tel-device'
+              />
+            </View>
 
             <View style={styles.form} >
               <Text style={styles.label}>SENHA</Text>

@@ -20,7 +20,10 @@ const Login = () => {
   }
 
   function handleLogin(email: string, senha: string) {
-    login(email, senha);
+    const usuario = login(email, senha);
+    if (!!usuario) {
+      navigation.navigate('CategoriaServico');
+    }
   }
 
   return (

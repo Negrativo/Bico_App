@@ -14,6 +14,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
+  modal: {
+    backgroundColor: '#FFFFFF',
+    width: 250,
+    height: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: '#00000F',
+  },
+
   container: {
     backgroundColor: '#FCFCFC',
     flex: 1,

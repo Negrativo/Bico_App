@@ -9,6 +9,6 @@ export async function cadastrarUsuario(nome: string, email: string, telefone: st
       .post('/usuario', usuarioCriar);
     return res.data.user as unknown as UsuarioByIdDTO;
   } catch (error) {
-    console.log('Erro no login: ', error);
+    console.log('Erro no cadastro: ', error);
   }
 }

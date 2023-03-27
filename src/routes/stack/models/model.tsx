@@ -5,6 +5,7 @@ export type propsNavigationStack = {
   Login: undefined;
   CadastroInicial: undefined;
   CadastroFinal: CadastroFinalParams;
+  CategoriaServico: undefined;
 };
 
 export interface CadastroFinalParams {
