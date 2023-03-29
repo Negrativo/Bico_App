@@ -6,12 +6,22 @@ export type propsNavigationStack = {
   CadastroInicial: undefined;
   CadastroFinal: CadastroFinalParams;
   CategoriaServico: undefined;
+  ListaServicos: ListaServicosParams;
+  AgendamentoServico: AgendamentoServicoParams;
 };
 
 export interface CadastroFinalParams {
   nome: string,
   email: string,
   senha: string
+}
+
+export interface ListaServicosParams {
+  listaServicos: string[];
+}
+
+export interface AgendamentoServicoParams {
+  servicoSelecionado: string;
 }
 
 export type propsStack = NativeStackNavigationProp<propsNavigationStack>;

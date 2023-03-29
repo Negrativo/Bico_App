@@ -7,6 +7,8 @@ import CadastroInicial from '../../pages/inicio/cadastroInicial/CadastroInicial'
 import CadastroFinal from '../../pages/inicio/cadastroFinal/CadastroFinal';
 import TelaInicial from '../../pages/inicio/telaInicial/TelaInicial';
 import CategoriasServico from '../../pages/principal/categoriasServico/CategoriasServico';
+import ListaServicos from '../../pages/principal/listaServicos/ListaServicos';
+import AgendamentoServico from '../../pages/principal/agendamento/AgendamentoServico';
 
 const {Navigator, Screen} = createNativeStackNavigator<propsNavigationStack>();
 
@@ -18,6 +20,8 @@ export default function () {
       <Screen name="CadastroInicial" component={CadastroInicial} />
       <Screen name="CadastroFinal" component={CadastroFinal} />
       <Screen name="CategoriaServico" component={CategoriasServico} />
+      <Screen name="ListaServicos" component={ListaServicos} />
+      <Screen name="AgendamentoServico" component={AgendamentoServico} />
     </Navigator>
   );
 }

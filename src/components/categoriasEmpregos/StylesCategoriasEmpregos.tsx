@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     width: 150,
     height: 170,
     shadowColor: 'black',
+    marginVertical: 25
   },
 
   containerView: {
@@ -13,15 +14,12 @@ const styles = StyleSheet.create({
   },
 
   containerImagem: {
-    flex: 3,
-  },
-
-  containerTexto: {
-    flex: 1
+    marginBottom: 10
   },
 
   Texto: {
     fontSize: 18,
+    textAlign: 'center'
   },
 
   fotoCategoria: {

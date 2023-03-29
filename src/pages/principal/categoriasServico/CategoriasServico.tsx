@@ -7,16 +7,49 @@ import { useAuth } from '../../../context/AuthContext';
 import { propsStack } from '../../../routes/stack/models/model';
 import api from '../../../service/api';
 import styles from './StyleCategoriaServico';
+import { empregos } from '../../../data/empregos';
 
 
 export default function () {
   const iconPesquisa = require('../../../../assets/pesquisar.png');
-  const empregos = require('../../../data/empregos');
+  const reformaReparo = require('../../../../assets/icon_empregos/reformas-reparos.png');
+  const suporteTecnico = require('../../../../assets/icon_empregos/assistencia-tecnica.png');
+  const servicoDomestico = require('../../../../assets/icon_empregos/servicos-domesticos.png');
+  const consultoria = require('../../../../assets/icon_empregos/consultoria.png');
+  const autos = require('../../../../assets/icon_empregos/mecanica.png');
+  const eventos = require('../../../../assets/icon_empregos/eventos.png');
 
   const navigation = useNavigation<propsStack>();
 
-  function acessaServicos(servicosCategoria: any) {
-    // navigation.navigate('Lista Serviços', { servicosCategoria });
+  function getImagemCategoria(image: string) {
+    switch (image) {
+      case "reformaReparo":
+        return reformaReparo;
+        break;
+      case "suporteTecnico":
+        return suporteTecnico;
+        break;
+      case "servicoDomestico":
+        return servicoDomestico;
+        break;
+      case "consultoria":
+        return consultoria;
+        break;
+      case "autos":
+        return autos;
+        break;
+      case "eventos":
+        return eventos;
+        break;
+
+      default:
+        return require('../../../../assets/pesquisar.png');
+        break;
+    }
+  }
+
+  function acessaServicos(listaServicos: string[]) {
+    navigation.navigate('ListaServicos', { listaServicos });
   }
 
   return (
@@ -44,7 +77,7 @@ export default function () {
             <CategoriasEmpregosComponent
               onPress={() => acessaServicos(item.Servicos)}
               nome={item.nome}
-              foto={item.imagem}
+              foto={getImagemCategoria(item.imagem)}
             />
           )}
         />

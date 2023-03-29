@@ -1,15 +1,8 @@
-const reformaReparo = require('../../assets/icon_empregos/reformas-reparos.png');
-const suporteTecnico = require('../../assets/icon_empregos/assistencia-tecnica.png');
-const servicoDomestico = require('../../assets/icon_empregos/servicos-domesticos.png');
-const consultoria = require('../../assets/icon_empregos/consultoria.png');
-const autos = require('../../assets/icon_empregos/mecanica.png');
-const eventos = require('../../assets/icon_empregos/eventos.png');
-
 export const empregos = [
   {
     "_id": "1",
     "nome": "Reformas e Reparos",
-    "imagem": reformaReparo,
+    "imagem": "reformaReparo",
     "Servicos": [
       "Acessibilidade",
       "Afiação",
@@ -85,7 +78,7 @@ export const empregos = [
   {
     "_id": "2",
     "nome": "Assistência Técnica",
-    "imagem": suporteTecnico,
+    "imagem": "suporteTecnico",
     "Servicos": [
       "Aparelho de Som",
       "Aparelhos de Ginástica",
@@ -118,7 +111,7 @@ export const empregos = [
   {
     "_id": "3",
     "nome": "Serviços Domésticos",
-    "imagem": servicoDomestico,
+    "imagem": "servicoDomestico",
     "Servicos": [
       "Adestrador de Cães",
       "Babá",
@@ -140,19 +133,19 @@ export const empregos = [
   {
     "_id": "4",
     "nome": "Festas e Eventos",
-    "imagem": eventos,
+    "imagem": "eventos",
     "Servicos": []
   },
   {
     "_id": "5",
     "nome": "Consultoria",
-    "imagem": consultoria,
+    "imagem": "consultoria",
     "Servicos": []
   },
   {
     "_id": "6",
     "nome": "Autos",
-    "imagem": autos,
+    "imagem": "autos",
     "Servicos": []
   }
 ]
