@@ -69,6 +69,11 @@ const styles = StyleSheet.create({
     color: 'white'
   },
 
+  textEndereco: {
+    color: 'white',
+    textAlign: 'center'
+  },
+
   horarioInput: {
     backgroundColor: '#00000F',
     borderWidth: 0.2,

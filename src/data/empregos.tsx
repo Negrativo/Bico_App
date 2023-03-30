@@ -72,7 +72,8 @@ export const empregos = [
       "Toldos e Coberturas",
       "Topografia",
       "Vidraceiro",
-      "Outros"
+      "Toldos",
+      "Outros",
     ]
   },
   {
@@ -134,7 +135,9 @@ export const empregos = [
     "_id": "4",
     "nome": "Festas e Eventos",
     "imagem": "eventos",
-    "Servicos": []
+    "Servicos": [
+      "DJ"
+    ]
   },
   {
     "_id": "5",

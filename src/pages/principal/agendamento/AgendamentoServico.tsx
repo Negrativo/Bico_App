@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, TextInput, SafeAreaView, ScrollView, Button } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker'
+import Local from '@react-native-community/geolocation';
+import Geocoder from 'react-native-geocoding';
+import { GOOGLE_API_KEY } from '../../../../environments';
 
 import { useAuth } from '../../../context/AuthContext';
 import styles from './StyleAgendamentoServico';
@@ -9,25 +12,47 @@ import { useRoute, useNavigation } from '@react-navigation/native';
 import { propsStack, AgendamentoServicoParams } from '../../../routes/stack/models/model';
 
 export default function () {
+  Geocoder.init(GOOGLE_API_KEY);
   const [horaAgendamento, setHoras] = useState('00:00');
   const [mostraSelecaoHorario, setSelecaoHorario] = useState(false);
-  const [location, setLocation] = useState(null);
+  const [location, setLocation] = useState("");
+
+  const [latitude, setLatitude] = useState(0);
+  const [longitude, setLongitude] = useState(0);
+
 
   const params = useRoute();
   const navigation = useNavigation<propsStack>();
 
   const servicoSelecionado: AgendamentoServicoParams = params.params as unknown as AgendamentoServicoParams;
 
+  const getLocate = async () => {
+    Geocoder.init(GOOGLE_API_KEY);
+    Local.getCurrentPosition(
+      (position) => {
+        setLatitude(position.coords.latitude);
+        setLongitude(position.coords.longitude);
 
-  // onPress={getLocate}
-  // const getLocate = async () => {
-  //     let { status } = await Location.requestForegroundPermissionsAsync();
-  //   if (status === 'granted') {
-  //     let location = await Location.getCurrentPositionAsync({});
-  //     console.log(location)
-  //     setLocation(location.coords);
-  //   }
-  // }
+        Geocoder.from({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        })
+          .then(addressJson => {
+            const _location = addressJson.results[0].formatted_address;
+            setLocation(_location);
+          })
+          .catch(error => console.warn(error));
+      },
+      (error) => {
+        console.log('Error location: ' + error);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 120000,
+        maximumAge: 1000
+      }
+    )
+  }
 
   const onChange = (event: any, selectedDate: any) => {
     if (event.type === "set") {
@@ -76,12 +101,17 @@ export default function () {
         <View style={styles.formEndereco}>
           <Text style={styles.textGeral}>Selecione o endereço para realização do serviço:</Text>
           <View style={styles.formInputObservacao}>
-            <Button title="Buscar localização"
-
-            />
+            <TextInput style={styles.textEndereco}
+              multiline={false}
+              placeholder={"Adicionar endereço"}
+              placeholderTextColor={"#FFFFFF"}
+              maxLength={200}
+            >
+              {location}
+            </TextInput>
           </View>
-          <TouchableOpacity>
-            <Text style={styles.textAdicionarEndereco} >Adicionar endereço</Text>
+          <TouchableOpacity onPress={getLocate}>
+            <Text style={styles.textAdicionarEndereco} >Buscar localização</Text>
           </TouchableOpacity>
         </View>
         <View>
@@ -93,3 +123,4 @@ export default function () {
     </ScrollView>
   );
 }
+
