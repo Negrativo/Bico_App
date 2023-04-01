@@ -29,14 +29,11 @@ export default function Pesquisa(props: BarraPesquisaProps) {
         {
           !(Search === '')
           && listaEmpregos
-            .filter((list: ListaEmpregoDTO) =>
-              list.nome
-                .toLowerCase()
-                .includes(Search.toLowerCase()))
-            .map((list: ListaEmpregoDTO, index: number) => (
+            .filter(list => list.toLowerCase().includes(Search.toLowerCase()))
+            .map((list: string, index: number) => (
               <View key={index} style={styles.itensPesquisa}>
-                <TouchableOpacity key={index} style={styles.botaoSelecao} onPress={() => selecionado(list.nome)}>
-                  <Text style={styles.textoOpcao}>{list.nome}</Text>
+                <TouchableOpacity key={index} style={styles.botaoSelecao} onPress={() => selecionado(list)}>
+                  <Text style={styles.textoOpcao}>{list}</Text>
                 </TouchableOpacity>
               </View>
             ))

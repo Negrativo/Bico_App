@@ -48,7 +48,7 @@ export default function () {
       },
       {
         enableHighAccuracy: true,
-        timeout: 120000,
+        timeout: 12000,
         maximumAge: 1000
       }
     )

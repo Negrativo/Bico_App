@@ -1,7 +1,7 @@
 import { ListaEmpregoDTO } from "../../dtos/ListaEmpregosDTO";
 
 export interface BarraPesquisaProps {
-  Lista: ListaEmpregoDTO[],
+  Lista: string[],
   placeholder: string,
   selecionaProfissao: any;
 }

@@ -24,6 +24,17 @@ const styles = StyleSheet.create({
     margin: 5
   },
 
+  formEndereco: {
+    backgroundColor: "#000000",
+    width: 320,
+    maxHeight: 150,
+    borderWidth: 0.5,
+    borderRadius: 50,
+    marginVertical: 5,
+    padding: 5,
+    justifyContent: 'center'
+  },
+
   formInputDescricao: {
     backgroundColor: "#000000",
     height: 200,
@@ -52,8 +63,17 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
 
+  modal: {
+    backgroundColor: '#FFFFFF',
+    width: 250,
+    height: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: '#00000F',
+  },
+
   formEmpregosSelecionados: {
-    height: 50,
+    height: 150,
     width: 300,
     flex: 1,
     flexWrap: 'wrap'
@@ -122,6 +142,11 @@ const styles = StyleSheet.create({
     margin: 5
   },
 
+  textAdicionarEndereco: {
+    fontSize: 16,
+    textDecorationLine: 'underline'
+  },
+
   buttonCadastro: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -141,6 +166,11 @@ const styles = StyleSheet.create({
     color: 'white'
   },
 
+  textEndereco: {
+    color: 'white',
+    textAlign: 'center'
+  },
+
   input: {
     backgroundColor: '#00000F',
     borderWidth: 0.2,
@@ -154,7 +184,7 @@ const styles = StyleSheet.create({
 
   form: {
     width: 300,
-    height: 30,
+    height: 70,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 10,

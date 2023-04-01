@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     width: 300,
     height: 50,
+    marginVertical: 10
   },
 });
 

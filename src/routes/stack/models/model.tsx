@@ -13,7 +13,8 @@ export type propsNavigationStack = {
 export interface CadastroFinalParams {
   nome: string,
   email: string,
-  senha: string
+  senha: string,
+  telefone: string
 }
 
 export interface ListaServicosParams {

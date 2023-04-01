@@ -36,18 +36,8 @@ export default function ({ }) {
           const email = values.email;
           const telefone = values.telefone;
           const senha = values.senha;
-          if (email.length > 0 && senha.length > 0) {
-            const usuarioExistente: Promise<Boolean> = verificarUsuarioExistente(email);
-            if (await usuarioExistente) {
-              console.log('Usuario já cadastrado');
-              setMensagemModal('Email já cadastrado');
-              showModal()
-            } else if (!usuarioExistente) {
-              cadastrarUsuario(nome, email, telefone, senha);
-              setMensagemModal('Cadastrado com sucesso');
-              showModal();
-              navigation.navigate('Login');
-            };
+          if (nome.length > 0 && email.length > 0 && senha.length > 0) {
+            navigation.navigate('CadastroFinal', { nome, email, senha, telefone });
           }
 
         }}

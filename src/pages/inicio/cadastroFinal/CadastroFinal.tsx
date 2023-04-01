@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Image, SafeAreaView, TouchableOpacity, ImageBackground, FlatList } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Image, SafeAreaView, TouchableOpacity, FlatList, TextInput, Button } from 'react-native';
 import { Formik } from 'formik';
-import MaskInput, { Masks } from 'react-native-mask-input';
-import { launchImageLibrary } from 'react-native-image-picker';
+import Local from '@react-native-community/geolocation';
+import Geocoder from 'react-native-geocoding';
 
 import api from '../../../service/api';
 
@@ -13,8 +13,13 @@ import TagInputSelecionado from '../../../components/tagInput/tagInputSelecionad
 import styles from './StyleCadastroFinal';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { CadastroFinalParams, propsStack } from '../../../routes/stack/models/model';
+import { GOOGLE_API_KEY } from '../../../../environments';
+import { empregos } from '../../../data/empregos';
+import { cadastrarUsuario } from '../../../service/usuarioService/UsuarioService';
+import Modal from 'react-native-modal';
 
 export default function () {
+  Geocoder.init(GOOGLE_API_KEY);
   const params = useRoute();
   const navigation = useNavigation<propsStack>();
 
@@ -22,52 +27,60 @@ export default function () {
   const nome = paramsCadastroFinal?.nome;
   const email = paramsCadastroFinal?.email;
   const senha = paramsCadastroFinal?.senha;
+  const telefone = paramsCadastroFinal?.telefone;
 
   const [Empregos, setEmpregos] = useState([]);
-  const [FotoPerfil, setFoto] = useState('');
   const [EmpregosSelecionados, setEmpregosSelecionados] = useState(['']);
+  const [location, setLocation] = useState("");
+  const [latitude, setLatitude] = useState(0);
+  const [longitude, setLongitude] = useState(0);
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [mensagemModal, setMensagemModal] = useState('');
 
+  const empregosSelecionaveis = empregos.flatMap(empregos => empregos.Servicos);
 
-  // async function permissao() {
-  //     if (Platform.OS !== 'web') {
-  //         const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-  //         if (status !== 'granted') {
-  //         alert('É necessario permissão para selecionar!');
-  //         }
-  //     }
-  // }
+  const showModal = () => {
+    setModalVisible(true);
+  };
 
-
-  // useEffect(() => {
-  //     let mounted = true;
-  //     if(mounted){
-  //         api.get('/pesquisa/cargos', {})
-  //         .then(response => {
-  //             if(mounted)
-  //                 setEmpregos(response.data);
-  //         })
-  //         .catch(error => {
-  //             console.log(error);
-  //         });
-  //     }
-  //     return () => mounted = false;
-  // }, [Empregos]); 
-
-
-  async function openGaleria() {
-    const result = await launchImageLibrary({
-      mediaType: 'photo'
-    });
-
-    if (result.assets) {
-      setFoto(`data:image/png,${result}`);
-    }
-
+  const hideModal = () => {
+    setModalVisible(false);
   };
 
 
+  const getLocate = async () => {
+    Geocoder.init(GOOGLE_API_KEY);
+    Local.getCurrentPosition(
+      (position) => {
+        setLatitude(position.coords.latitude);
+        setLongitude(position.coords.longitude);
+
+        Geocoder.from({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        })
+          .then(addressJson => {
+            const endereco = addressJson.results[0].formatted_address;
+            setLocation(endereco);
+          })
+          .catch(error => console.warn(error));
+      },
+      (error) => {
+        console.log('Error location: ' + error);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 12000,
+        maximumAge: 1000
+      }
+    )
+  }
+
+
   const adicionarProfissao = (empregoSelecionado: string) => {
-    setEmpregosSelecionados([...EmpregosSelecionados, empregoSelecionado]);
+    if (EmpregosSelecionados.filter((emprego) => emprego !== empregoSelecionado)) {
+      setEmpregosSelecionados([...EmpregosSelecionados, empregoSelecionado]);
+    }
   };
 
   const removerProfissao = (empregoSelecionado: string) => {
@@ -77,63 +90,51 @@ export default function () {
   return (
     <SafeAreaView style={styles.container}>
       <Formik
-        initialValues={{ telefone: '' }}
+        initialValues={{}}
         validationSchema={ValidateCadastroFone}
         onSubmit={(values, { setErrors }) => {
-          let fotoPerfil = FotoPerfil;
-          let empregos = EmpregosSelecionados;
-          let telefone = values.telefone;
-          api.post('/usuario/cadastro', {
-            nome, email, senha,
-            fotoPerfil, empregos, telefone
-          })
-            .then(res => {
-              console.log('Cadastro completo!');
-              navigation.navigate('Login');
-            })
-            .catch(error => {
-              console.log(error);
-            });
+          cadastrarUsuario(nome, email, telefone, senha, latitude, longitude, location, EmpregosSelecionados);
+          setMensagemModal('Cadastrado com sucesso!')
+          showModal();
         }}
       >
         {(props) => (
           <View style={styles.formTela}>
-            <View style={styles.formFotoPerfil}>
-              <View style={styles.backgroudFotoPerfil}>
-                <View>
-                  {FotoPerfil !== '' &&
-                    <Image source={{ uri: FotoPerfil }} style={styles.fotoPerfil} />
-                  }
-                </View>
+
+            <Modal isVisible={isModalVisible}>
+              <View style={styles.modal}>
+                <Text>{mensagemModal}</Text>
+                <Button title="Fechar" onPress={hideModal} />
               </View>
-              <TouchableOpacity onPress={() => openGaleria()} style={styles.bottomFoto}>
-                <Text style={styles.textFoto}>Selecionar foto</Text>
-              </TouchableOpacity>
-            </View>
+            </Modal>
+
             <View>
               <Text style={styles.textNome}>{nome}</Text>
             </View>
             <View style={styles.formDescricao}>
               <View style={styles.form} >
-                <Text style={styles.label}>Numero para contato profissional</Text>
-                <MaskInput
-                  style={styles.input}
-                  value={props.values.telefone}
-                  onChangeText={(masked, unmasked, obfuscated) => props.setFieldValue('telefone', unmasked)}
-                  mask={Masks.BRL_PHONE}
-                  textAlign="center"
-                  textContentType='telephoneNumber'
-                  placeholder="Telefone"
-                  placeholderTextColor="#FFFFFF"
-                  autoComplete='tel-device'
-                />
+                <Text style={styles.label}>Endereço</Text>
+                <View style={styles.formEndereco}>
+                  <TextInput style={styles.textEndereco}
+                    multiline={false}
+                    placeholder={"Adicionar endereço"}
+                    placeholderTextColor={"#FFFFFF"}
+                    maxLength={200}
+                  >
+                    {location}
+                  </TextInput>
+                </View>
+                <TouchableOpacity onPress={getLocate}>
+                  <Text style={styles.textAdicionarEndereco} >Buscar localização</Text>
+                </TouchableOpacity>
               </View>
             </View>
             <View style={styles.formCategorias}>
-              <Text style={styles.textPesquisaEmprego}>Quais são suas experiências  profissionais?</Text>
-              <Pesquisa Lista={Empregos} placeholder={"Empregos"} selecionaProfissao={adicionarProfissao} />
+              <Text style={styles.textPesquisaEmprego}>Quais são suas experiências profissionais?</Text>
+              <Pesquisa Lista={empregosSelecionaveis} placeholder={"Empregos"} selecionaProfissao={adicionarProfissao} />
               <View style={styles.formEmpregosSelecionados}>
                 {(EmpregosSelecionados.length > 0) &&
+                  EmpregosSelecionados.filter(emprego => emprego.length > 1) &&
                   <FlatList
                     horizontal={false}
                     numColumns={2}
