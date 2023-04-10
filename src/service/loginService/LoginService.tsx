@@ -1,9 +1,11 @@
 import { UsuarioByIdDTO } from "../../dtos/UsuarioDTO";
 import { UsuarioEmailDTO } from "../../dtos/UsuarioEmailDTO";
+import { UsuarioEmailSenhaDTO } from "../../dtos/UsuarioEmailSenhaDTO";
 import api from "../api";
 
 export async function login(email: string, senha: string) {
-  const usuarioLogin = { email, senha } as unknown as UsuarioByIdDTO;
+  const usuarioLogin = { email, senha } as UsuarioEmailSenhaDTO;
+  console.log(usuarioLogin)
   try {
     const res = await api
       .post('/inicio/login', usuarioLogin);

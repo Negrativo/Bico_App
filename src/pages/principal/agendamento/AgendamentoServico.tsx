@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput, SafeAreaView, ScrollView, Button } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, SafeAreaView, ScrollView } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker'
 import Local from '@react-native-community/geolocation';
 import Geocoder from 'react-native-geocoding';
 import { GOOGLE_API_KEY } from '../../../../environments';
-
-import { useAuth } from '../../../context/AuthContext';
 import styles from './StyleAgendamentoServico';
 import CalendarioComponent from '../../../components/calendario/CalendarioComponent';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import { propsStack, AgendamentoServicoParams } from '../../../routes/stack/models/model';
+import { SolicitacaoDTO } from '../../../dtos/SolicitacaoDTO';
+import { solicitarServico } from '../../../service/solicitacaoService/solicitacaoService';
 
 export default function () {
   Geocoder.init(GOOGLE_API_KEY);
@@ -63,6 +63,23 @@ export default function () {
     setSelecaoHorario(!mostraSelecaoHorario);
   };
 
+  const solicitar = () => {
+    console.log("solicitando");
+    //TO DO - criar processo para pegar dia selecionado calendario
+    const servico = servicoSelecionado.servicoSelecionado;
+    const solicitacaoDTO = {
+      servico,
+      diaSolicitado: '01-01-2023',
+      horaAgendamento,
+      observacao: "observacao",
+      latitude,
+      longitude,
+      location
+    } as unknown as SolicitacaoDTO;
+    console.log(solicitacaoDTO);
+    solicitarServico(solicitacaoDTO);
+  }
+
   return (
     <ScrollView>
       <SafeAreaView style={styles.container}>
@@ -115,7 +132,7 @@ export default function () {
           </TouchableOpacity>
         </View>
         <View>
-          <TouchableOpacity style={styles.buttonSolicitacao}>
+          <TouchableOpacity onPress={solicitar} style={styles.buttonSolicitacao}>
             <Text style={styles.textFinalizacao}>SOLICITAR PROFISSIONAL</Text>
           </TouchableOpacity>
         </View>

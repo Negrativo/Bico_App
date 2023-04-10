@@ -21,6 +21,7 @@ const Login = () => {
 
   function handleLogin(email: string, senha: string) {
     const usuario = login(email, senha);
+    console.log(usuario)
     if (!!usuario) {
       navigation.navigate('CategoriaServico');
     }
@@ -34,8 +35,7 @@ const Login = () => {
         onSubmit={(values, {}) => {
           let email = values.email;
           let senha = values.senha;
-          console.log(email, senha);
-          // handleLogin(email, senha);
+          handleLogin(email, senha);
         }}>
         {props => (
           <View style={styles.image}>

@@ -19,17 +19,16 @@ import { cadastrarUsuario } from '../../../service/usuarioService/UsuarioService
 import Modal from 'react-native-modal';
 
 export default function () {
-  Geocoder.init(GOOGLE_API_KEY);
   const params = useRoute();
   const navigation = useNavigation<propsStack>();
-
   const paramsCadastroFinal: CadastroFinalParams = params.params as unknown as CadastroFinalParams;
+  Geocoder.init(GOOGLE_API_KEY);
+
   const nome = paramsCadastroFinal?.nome;
   const email = paramsCadastroFinal?.email;
   const senha = paramsCadastroFinal?.senha;
   const telefone = paramsCadastroFinal?.telefone;
 
-  const [Empregos, setEmpregos] = useState([]);
   const [EmpregosSelecionados, setEmpregosSelecionados] = useState(['']);
   const [location, setLocation] = useState("");
   const [latitude, setLatitude] = useState(0);
@@ -46,7 +45,6 @@ export default function () {
   const hideModal = () => {
     setModalVisible(false);
   };
-
 
   const getLocate = async () => {
     Geocoder.init(GOOGLE_API_KEY);
@@ -93,9 +91,12 @@ export default function () {
         initialValues={{}}
         validationSchema={ValidateCadastroFone}
         onSubmit={(values, { setErrors }) => {
-          cadastrarUsuario(nome, email, telefone, senha, latitude, longitude, location, EmpregosSelecionados);
-          setMensagemModal('Cadastrado com sucesso!')
-          showModal();
+          const usuarioCadastrado = cadastrarUsuario(nome, email, telefone, senha, latitude, longitude, location, EmpregosSelecionados);
+          if (!!usuarioCadastrado) {
+            setMensagemModal('Cadastrado com sucesso!')
+            showModal();
+            navigation.navigate('Login');
+          }
         }}
       >
         {(props) => (
