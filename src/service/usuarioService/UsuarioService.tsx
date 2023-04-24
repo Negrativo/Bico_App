@@ -2,7 +2,7 @@ import { AxiosResponse } from "axios";
 import { UsuarioAtualizarDTO } from "../../dtos/UsuarioAtualizarDTO";
 import { UsuarioCriarDTO } from "../../dtos/UsuarioCriarDTO";
 import api from "../api";
-import { UsuarioByIdDTO } from "../../dtos/UsuarioDTO";
+import { UsuarioByIdDTO } from "../../dtos/UsuarioByIdDTO";
 
 export async function cadastrarUsuario(nome: string, email: string, telefone: string, senha: string): Promise<String> {
   const usuarioCriar = { nome, email, senha, telefone } as UsuarioCriarDTO;

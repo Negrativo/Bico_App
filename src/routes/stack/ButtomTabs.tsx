@@ -10,7 +10,8 @@ import { propsNavigationStack } from './models/model';
 const { Navigator, Screen } = createMaterialBottomTabNavigator<propsNavigationStack>();
 
 export default function BottomTabs() {
-  return <Navigator barStyle={{ backgroundColor: '#000000' }}>
+  return (
+    <Navigator barStyle={{ backgroundColor: '#000000' }}>
     <Screen
       name="CategoriaServico"
       component={CategoriasServico}
@@ -18,8 +19,8 @@ export default function BottomTabs() {
         tabBarIcon: ({ color }) => (
           <MaterialCommunityIcons name="home" color={"#EDEDED"} size={26} />
         ),
-      }
-      } />
+        }}
+      />
     <Screen
       name="Perfil"
       component={Perfil}
@@ -30,4 +31,5 @@ export default function BottomTabs() {
       }}
     />
   </Navigator>
+  )
 }

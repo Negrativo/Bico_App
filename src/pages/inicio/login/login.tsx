@@ -19,11 +19,10 @@ const Login = () => {
     navigation.navigate('CadastroInicial');
   }
 
-  function handleLogin(email: string, senha: string) {
-    const usuario = login(email, senha);
-    console.log(usuario)
-    if (!!usuario) {
-      navigation.navigate('CategoriaServico');
+  async function handleLogin(email: string, senha: string) {
+    const usuario = await login(email, senha);
+    if (!!usuario.id) {
+      navigation.navigate('Home');
     }
   }
 

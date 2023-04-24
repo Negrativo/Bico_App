@@ -18,7 +18,7 @@ import { empregos } from '../../../data/empregos';
 import Modal from 'react-native-modal';
 import { atualizarUsuario, findById } from '../../../service/usuarioService/UsuarioService';
 import { login } from '../../../service/loginService/LoginService';
-import { UsuarioByIdDTO } from '../../../dtos/UsuarioDTO';
+import { UsuarioByIdDTO } from '../../../dtos/UsuarioByIdDTO';
 
 export default function () {
   const params = useRoute();
