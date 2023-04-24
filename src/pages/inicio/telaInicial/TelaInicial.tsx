@@ -17,7 +17,7 @@ const Login = () => {
   }
 
   function navigateEscolhaServico() {
-    navigation.navigate('CategoriaServico');
+    navigation.navigate('Home');
   }
 
   return (

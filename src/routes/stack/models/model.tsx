@@ -1,7 +1,7 @@
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import { UsuarioCriarDTO } from '../../../dtos/UsuarioCriarDTO';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 export type propsNavigationStack = {
+  Home: undefined;
   TelaInicial: undefined;
   Login: undefined;
   CadastroInicial: undefined;
@@ -9,6 +9,7 @@ export type propsNavigationStack = {
   CategoriaServico: undefined;
   ListaServicos: ListaServicosParams;
   AgendamentoServico: AgendamentoServicoParams;
+  Perfil: undefined;
 };
 
 export interface CadastroFinalParams {
