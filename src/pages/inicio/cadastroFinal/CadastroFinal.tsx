@@ -15,8 +15,10 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { CadastroFinalParams, propsStack } from '../../../routes/stack/models/model';
 import { GOOGLE_API_KEY } from '../../../../environments';
 import { empregos } from '../../../data/empregos';
-import { cadastrarUsuario } from '../../../service/usuarioService/UsuarioService';
 import Modal from 'react-native-modal';
+import { atualizarUsuario, findById } from '../../../service/usuarioService/UsuarioService';
+import { login } from '../../../service/loginService/LoginService';
+import { UsuarioByIdDTO } from '../../../dtos/UsuarioDTO';
 
 export default function () {
   const params = useRoute();
@@ -24,10 +26,8 @@ export default function () {
   const paramsCadastroFinal: CadastroFinalParams = params.params as unknown as CadastroFinalParams;
   Geocoder.init(GOOGLE_API_KEY);
 
-  const nome = paramsCadastroFinal?.nome;
-  const email = paramsCadastroFinal?.email;
-  const senha = paramsCadastroFinal?.senha;
-  const telefone = paramsCadastroFinal?.telefone;
+  const usuarioCriado = paramsCadastroFinal?.usuarioId;
+  let usuarioById: UsuarioByIdDTO;
 
   const [EmpregosSelecionados, setEmpregosSelecionados] = useState(['']);
   const [location, setLocation] = useState("");
@@ -90,8 +90,9 @@ export default function () {
       <Formik
         initialValues={{}}
         validationSchema={ValidateCadastroFone}
-        onSubmit={(values, { setErrors }) => {
-          const usuarioCadastrado = cadastrarUsuario(nome, email, telefone, senha, latitude, longitude, location, EmpregosSelecionados);
+        onSubmit={async (values, { setErrors }) => {
+          //usuarioById = await findById(usuarioCriado);
+          const usuarioCadastrado = await atualizarUsuario(usuarioCriado, latitude.toString(), longitude.toString(), location, EmpregosSelecionados);
           if (!!usuarioCadastrado) {
             setMensagemModal('Cadastrado com sucesso!')
             showModal();
@@ -110,7 +111,7 @@ export default function () {
             </Modal>
 
             <View>
-              <Text style={styles.textNome}>{nome}</Text>
+              <Text style={styles.textNome}>{usuarioById?.nome}</Text>
             </View>
             <View style={styles.formDescricao}>
               <View style={styles.form} >

@@ -1,4 +1,5 @@
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import { UsuarioCriarDTO } from '../../../dtos/UsuarioCriarDTO';
 
 export type propsNavigationStack = {
   TelaInicial: undefined;
@@ -11,10 +12,7 @@ export type propsNavigationStack = {
 };
 
 export interface CadastroFinalParams {
-  nome: string,
-  email: string,
-  senha: string,
-  telefone: string
+  usuarioId: String;
 }
 
 export interface ListaServicosParams {

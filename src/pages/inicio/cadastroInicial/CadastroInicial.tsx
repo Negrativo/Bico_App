@@ -37,9 +37,9 @@ export default function ({ }) {
           const telefone = values.telefone;
           const senha = values.senha;
           if (nome.length > 0 && email.length > 0 && senha.length > 0) {
-            navigation.navigate('CadastroFinal', { nome, email, senha, telefone });
+            const usuarioCriado = await cadastrarUsuario(nome, email, telefone, senha);
+            navigation.navigate('CadastroFinal', { usuarioId: usuarioCriado });
           }
-
         }}
       >
         {(props) => (

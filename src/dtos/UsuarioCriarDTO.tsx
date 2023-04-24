@@ -3,8 +3,4 @@ export interface UsuarioCriarDTO {
   email: String;
   senha: String;
   telefone: String;
-  latitude: Number;
-  longitude: Number;
-  endereco: String;
-  profissoes: String[];
 }
