@@ -12,24 +12,24 @@ const { Navigator, Screen } = createMaterialBottomTabNavigator<propsNavigationSt
 export default function BottomTabs() {
   return (
     <Navigator barStyle={{ backgroundColor: '#000000' }}>
-    <Screen
-      name="CategoriaServico"
-      component={CategoriasServico}
-      options={{
-        tabBarIcon: ({ color }) => (
-          <MaterialCommunityIcons name="home" color={"#EDEDED"} size={26} />
-        ),
+      <Screen
+        name="CategoriaServico"
+        component={CategoriasServico}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="home" color={"#EDEDED"} size={26} />
+          ),
         }}
       />
-    <Screen
-      name="Perfil"
-      component={Perfil}
-      options={{
-        tabBarIcon: ({ color }) => (
-          <MaterialCommunityIcons name="account" color={"#EDEDED"} size={26} />
-        ),
-      }}
-    />
-  </Navigator>
+      <Screen
+        name="Perfil"
+        component={Perfil}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="account" color={"#EDEDED"} size={26} />
+          ),
+        }}
+      />
+    </Navigator>
   )
 }

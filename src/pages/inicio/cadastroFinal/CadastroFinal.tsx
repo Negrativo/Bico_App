@@ -3,13 +3,9 @@ import { View, Text, Image, SafeAreaView, TouchableOpacity, FlatList, TextInput,
 import { Formik } from 'formik';
 import Local from '@react-native-community/geolocation';
 import Geocoder from 'react-native-geocoding';
-
-import api from '../../../service/api';
-
 import ValidateCadastroFone from '../../../components/schema/CadastroFoneSchema';
 import Pesquisa from '../../../components/barraPesquisa/BarraPesquisaComponent';
 import TagInputSelecionado from '../../../components/tagInput/tagInputSelecionado/TagInputEmpregoSelecionado';
-
 import styles from './StyleCadastroFinal';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { CadastroFinalParams, propsStack } from '../../../routes/stack/models/model';
@@ -17,7 +13,6 @@ import { GOOGLE_API_KEY } from '../../../../environments';
 import { empregos } from '../../../data/empregos';
 import Modal from 'react-native-modal';
 import { atualizarUsuario, findById } from '../../../service/usuarioService/UsuarioService';
-import { login } from '../../../service/loginService/LoginService';
 import { UsuarioByIdDTO } from '../../../dtos/UsuarioByIdDTO';
 
 export default function () {
@@ -29,7 +24,7 @@ export default function () {
   const usuarioCriado = paramsCadastroFinal?.usuarioId;
   let usuarioById: UsuarioByIdDTO;
 
-  const [EmpregosSelecionados, setEmpregosSelecionados] = useState(['']);
+  const [EmpregosSelecionados, setEmpregosSelecionados] = useState<string[]>([]);
   const [location, setLocation] = useState("");
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
@@ -73,7 +68,6 @@ export default function () {
       }
     )
   }
-
 
   const adicionarProfissao = (empregoSelecionado: string) => {
     if (EmpregosSelecionados.filter((emprego) => emprego !== empregoSelecionado)) {

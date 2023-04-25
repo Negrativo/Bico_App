@@ -1,8 +1,7 @@
 import { useRoute, useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, Image, Text, TextInput, FlatList, SafeAreaView, TouchableOpacity } from 'react-native';
-import { AgendamentoServicoParams, CadastroFinalParams, ListaServicosParams, propsStack } from '../../../routes/stack/models/model';
-import navigation from '../../../routes/stack/navigation';
+import { ListaServicosParams, propsStack } from '../../../routes/stack/models/model';
 import styles from './StyleListaServicos';
 
 

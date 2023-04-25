@@ -5,7 +5,6 @@ import { Formik } from 'formik';
 import styles from './StyleCadastroInicial';
 import { propsStack } from '../../../routes/stack/models/model';
 import { useNavigation } from '@react-navigation/native';
-import { verificarUsuarioExistente } from '../../../service/loginService/LoginService';
 import { Button } from 'react-native';
 import { cadastrarUsuario } from '../../../service/usuarioService/UsuarioService';
 import MaskInput, { Masks } from 'react-native-mask-input';

@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity, ScrollView } from 'react-native';
-
-import { ListaEmpregoDTO } from '../../dtos/ListaEmpregosDTO';
 import { BarraPesquisaProps } from './BarraPesquisaProps';
 import styles from './StyleBarraPesquisaComponent';
 

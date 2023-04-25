@@ -8,7 +8,6 @@ import styles from './StyleLogin';
 import ValidateLogin from '../../../components/schema/LoginSchema';
 import { useNavigation } from '@react-navigation/native';
 import { propsStack } from '../../../routes/stack/models/model';
-import { login } from '../../../service/loginService/LoginService';
 import { useUser } from '../../../context/AuthContext';
 
 const Login = () => {

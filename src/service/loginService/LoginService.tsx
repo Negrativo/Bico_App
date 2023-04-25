@@ -2,7 +2,6 @@ import { AxiosResponse } from "axios";
 import { UsuarioEmailDTO } from "../../dtos/UsuarioEmailDTO";
 import { UsuarioEmailSenhaDTO } from "../../dtos/UsuarioEmailSenhaDTO";
 import api from "../api";
-import { onSignIn } from "../auth";
 import { UsuarioDTO as Usuario } from "../../dtos/UsuarioDTO";
 
 export async function login(email: string, senha: string): Promise<Usuario> {

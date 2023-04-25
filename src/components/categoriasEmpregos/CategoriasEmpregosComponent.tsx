@@ -4,7 +4,6 @@ import { CategoriaProps } from './CategoriaEmpregoProps';
 import styles from './StylesCategoriasEmpregos';
 
 export default function categoriasEmpregos(props: CategoriaProps) {
-  // 
   return (
     <>
       {props?.nome &&

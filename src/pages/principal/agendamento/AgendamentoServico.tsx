@@ -16,14 +16,10 @@ export default function () {
   const [horaAgendamento, setHoras] = useState('00:00');
   const [mostraSelecaoHorario, setSelecaoHorario] = useState(false);
   const [location, setLocation] = useState("");
-
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
 
-
   const params = useRoute();
-  const navigation = useNavigation<propsStack>();
-
   const servicoSelecionado: AgendamentoServicoParams = params.params as unknown as AgendamentoServicoParams;
 
   const getLocate = async () => {

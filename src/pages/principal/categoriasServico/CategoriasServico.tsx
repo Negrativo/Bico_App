@@ -1,11 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useState, useLayoutEffect } from 'react';
+import React from 'react';
 import { View, Image, Text, TextInput, FlatList, SafeAreaView } from 'react-native';
 import CategoriasEmpregosComponent from '../../../components/categoriasEmpregos/CategoriasEmpregosComponent';
 import { propsStack } from '../../../routes/stack/models/model';
 import styles from './StyleCategoriaServico';
 import { empregos } from '../../../data/empregos';
-
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default function () {
   const iconPesquisa = require('../../../../assets/pesquisar.png');
@@ -22,26 +22,18 @@ export default function () {
     switch (image) {
       case "reformaReparo":
         return reformaReparo;
-        break;
       case "suporteTecnico":
         return suporteTecnico;
-        break;
       case "servicoDomestico":
         return servicoDomestico;
-        break;
       case "consultoria":
         return consultoria;
-        break;
       case "autos":
         return autos;
-        break;
       case "eventos":
         return eventos;
-        break;
-
       default:
         return require('../../../../assets/pesquisar.png');
-        break;
     }
   }
 
@@ -52,6 +44,7 @@ export default function () {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.formBarraPesquisa}>
+        <MaterialCommunityIcons name='home' color={'#EDEDED'} size={26} />
         <TextInput
           style={styles.barraPesquisa}
           textAlign="left"

@@ -27,7 +27,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const LoginUser = async (email: string, senha: string) => {
     const user = await login(email, senha);
     setUser(user);
-    onSignIn(user);
+    // onSignIn(user);
   }
 
   const value = { user, setUser, LoginUser };

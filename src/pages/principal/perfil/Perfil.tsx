@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { View, Text, Image, TouchableOpacity, ImageBackground, FlatList } from 'react-native';
-import { UserSignedIn } from '../../../service/auth';
 
 import styles from './StylePerfil';
-import { UsuarioDTO } from '../../../dtos/UsuarioDTO';
 import { useUser } from '../../../context/AuthContext';
 
 export default function () {
-  const [dadosLista, setDados] = useState('');
-  const [hasErros, setHasErros] = useState(false);
-  const { user, setUser } = useUser();
+  const { user } = useUser();
 
   function EditarUser(): void {
     throw new Error('Function not implemented.');
