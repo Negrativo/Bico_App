@@ -5,7 +5,7 @@ import styles from './StylePerfil';
 import { useUser } from '../../../context/AuthContext';
 
 export default function () {
-  const { user } = useUser();
+  const { user, setUser } = useUser();
 
   function EditarUser(): void {
     throw new Error('Function not implemented.');
@@ -16,7 +16,7 @@ export default function () {
   }
 
   function logoutUser(): void {
-    throw new Error('Function not implemented.');
+    setUser(null);
   }
 
   return (
@@ -28,12 +28,14 @@ export default function () {
         <Text style={styles.Text}>__________________________</Text>
         <View style={styles.scrollContainer}>
           <View style={styles.formBottons}>
-            <TouchableOpacity style={styles.buttonCadastro} onPress={() => EditarUser()}>
-              <Text style={styles.textBottom}>Atualizar dados</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonCadastro} onPress={() => solicitacaoUser()}>
-              <Text style={styles.textBottom}>Solicitações de serviço</Text>
-            </TouchableOpacity>
+            {(!!user && user?.servicos.length > 0)
+              ?
+              <TouchableOpacity style={styles.buttonCadastro} onPress={() => solicitacaoUser()}>
+                <Text style={styles.textBottom}>Solicitações de serviço</Text>
+              </TouchableOpacity>
+              :
+              <></>
+            }
             <TouchableOpacity style={styles.buttonCadastro}>
               <Text style={styles.textBottom}>Configurações</Text>
             </TouchableOpacity>

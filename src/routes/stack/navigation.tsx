@@ -8,26 +8,36 @@ import AgendamentoServico from '../../pages/principal/agendamento/AgendamentoSer
 import { propsNavigationStack } from './models/model';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import BottomTabs from './ButtomTabs';
+import { useUser } from '../../context/AuthContext';
 
 const {Navigator, Screen} = createNativeStackNavigator<propsNavigationStack>();
 
 export default function () {
+  const { user } = useUser();
+
   return (
     <Navigator screenOptions={{ headerShown: false }}>
-      <Screen name="Login" component={Login} />
-      <Screen name="TipoCadastro" component={TipoCadastro} />
-      <Screen name="CadastroInicial" component={CadastroInicial} />
-      <Screen name="CadastroFinal" component={CadastroFinal} />
-      <Screen
-        name="Home"
-        children={BottomTabs}
-        options={{
-          headerLeft: () => null,
-          headerShown: false
-        }}
-      />
-      <Screen name="ListaServicos" component={ListaServicos} />
-      <Screen name="AgendamentoServico" component={AgendamentoServico} />
+      {!!user?.id ? (
+        <>
+          <Screen
+            name="Home"
+            children={BottomTabs}
+            options={{
+              headerLeft: () => null,
+              headerShown: false
+            }}
+          />
+          <Screen name="ListaServicos" component={ListaServicos} />
+          <Screen name="AgendamentoServico" component={AgendamentoServico} />
+        </>
+      ) : (
+        <>
+          <Screen name="Login" component={Login} />
+          <Screen name="TipoCadastro" component={TipoCadastro} />
+          <Screen name="CadastroInicial" component={CadastroInicial} />
+          <Screen name="CadastroFinal" component={CadastroFinal} />
+        </>
+      )}
     </Navigator>
   );
 }
