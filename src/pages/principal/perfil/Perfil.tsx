@@ -1,15 +1,15 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, ImageBackground, FlatList } from 'react-native';
 import { UserSignedIn } from '../../../service/auth';
 
 import styles from './StylePerfil';
 import { UsuarioDTO } from '../../../dtos/UsuarioDTO';
+import { useUser } from '../../../context/AuthContext';
 
 export default function () {
   const [dadosLista, setDados] = useState('');
   const [hasErros, setHasErros] = useState(false);
-
-  let User = UserSignedIn() as unknown as UsuarioDTO;
+  const { user, setUser } = useUser();
 
   function EditarUser(): void {
     throw new Error('Function not implemented.');
@@ -27,7 +27,7 @@ export default function () {
     <View style={styles.container}>
       <View style={styles.container}>
         <View style={styles.formCabecalhoPerfil}>
-          <Text style={styles.textNome}>{User?.nome}</Text>
+          <Text style={styles.textNome}>{user?.nome}</Text>
         </View>
         <Text>__________________________</Text>
         <View style={styles.scrollContainer}>

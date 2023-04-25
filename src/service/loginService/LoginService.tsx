@@ -10,9 +10,8 @@ export async function login(email: string, senha: string): Promise<Usuario> {
   return await api
     .post<Usuario>(`/inicio/login`, usuarioLogin)
     .then((response: AxiosResponse<Usuario>) => {
-      const user = response.data;
-      onSignIn(user);
-      return user;
+      const userResponse = response.data;
+      return userResponse;
     })
     .catch((error) => {
       throw new Error(`Erro ao fazer Login. Erro: ${error}`);

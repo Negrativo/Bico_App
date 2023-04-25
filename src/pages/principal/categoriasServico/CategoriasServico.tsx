@@ -2,10 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useState, useLayoutEffect } from 'react';
 import { View, Image, Text, TextInput, FlatList, SafeAreaView } from 'react-native';
 import CategoriasEmpregosComponent from '../../../components/categoriasEmpregos/CategoriasEmpregosComponent';
-
-import { useAuth } from '../../../context/AuthContext';
 import { propsStack } from '../../../routes/stack/models/model';
-import api from '../../../service/api';
 import styles from './StyleCategoriaServico';
 import { empregos } from '../../../data/empregos';
 

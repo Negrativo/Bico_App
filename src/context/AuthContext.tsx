@@ -1,72 +1,40 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, { useState, useContext, createContext } from 'react';
+import { UsuarioDTO } from '../dtos/UsuarioDTO';
+import { login } from '../service/loginService/LoginService';
+import { onSignIn } from '../service/auth';
 
-import api from '../service/api';
-import {onSignOut, onSignIn, isSignedIn, UserSignedIn} from '../service/auth';
+interface UserContextData {
+  user: UsuarioDTO | null;
+  setUser: React.Dispatch<React.SetStateAction<UsuarioDTO | null>>;
+  LoginUser: (email: string, password: string) => Promise<void>;
+}
 
-const AuthContext = React.createContext({});
+const UserContext = createContext<UserContextData>({
+  user: null,
+  setUser: () => { },
+  LoginUser: async (email: string, password: string) => { },
+});
 
-export const AuthProvider = (children: any) => {
-  const [User, setUser] = useState(null);
-  const [Token, setToken] = useState(null);
-  const [Logado, setUserLogado] = useState(false);
+interface UserProviderProps {
+  children?: React.ReactNode;
+}
 
-  useEffect(() => {
-    isSignedIn()
-      .then(res => {
-        if (res === true) {
-          setUserLogado(res);
-          UserSignedIn().then(dados => {
-            if (dados) {
-              setUser(dados.user);
-              // setToken(dados.token);
-            }
-          });
-        }
-      })
-      .catch(erro => console.log('Erro na inicialização: ', erro));
-  }, [Logado]);
+export const useUser = (): UserContextData => useContext(UserContext);
 
-  //Alterar para fazer todas as mudanças no front e quando o app detectar alteração, atualizar o usuario no back
-  useEffect(() => {
-    if (User && Logado) {
-    }
-  });
+export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
+  const [user, setUser] = useState<UsuarioDTO | null>(null);
 
-  function Login(email: string, senha: string) {
-    api
-      .post('/login', {
-        email,
-        senha,
-      })
-      .then(res => {
-        const User = res.data.user;
-        const Token = res.data.token;
-        onSignIn(Token, User);
-        setUser(User);
-        setToken(Token);
-        setUserLogado(true);
-      })
-      .catch(error => {
-        console.log('Erro no login: ', error);
-      });
+  const LoginUser = async (email: string, senha: string) => {
+    const user = await login(email, senha);
+    setUser(user);
+    onSignIn(user);
   }
 
-  function Logout() {
-    onSignOut();
-    setUserLogado(false);
-    setToken(null);
-    //setUser(null); TO DO - Implementar remoção do user apos logout
-  }
+  const value = { user, setUser, LoginUser };
 
   return (
-    <AuthContext.Provider value={{Logado, Login, Logout, User, Token}}>
+    <UserContext.Provider value={value}>
       {children}
-    </AuthContext.Provider>
+    </UserContext.Provider>
   );
 };
-
-export function useAuth() {
-  const context = useContext(AuthContext);
-
-  return context;
-}
