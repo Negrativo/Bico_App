@@ -2,7 +2,7 @@
 import React from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
 import Video from 'react-native-video';
-import {Formik} from 'formik';
+import { Formik } from 'formik';
 import styles from './StyleLogin';
 
 import ValidateLogin from '../../../components/schema/LoginSchema';
@@ -14,10 +14,10 @@ const Login = () => {
   const video = require('../../../../assets/fundofinal.mp4');
   const logo = require('../../../../assets/BICO-3.png');
   const navigation = useNavigation<propsStack>();
-  const { user, setUser, LoginUser } = useUser();
+  const { user, LoginUser } = useUser();
 
   async function handleSubmitCadastro() {
-    navigation.navigate('CadastroInicial');
+    navigation.navigate('TipoCadastro');
   }
 
   async function handleLogin(email: string, senha: string) {
@@ -30,9 +30,9 @@ const Login = () => {
   return (
     <View style={styles.container}>
       <Formik
-        initialValues={{email: '', senha: '', error: ''}}
+        initialValues={{ email: '', senha: '', error: '' }}
         validationSchema={ValidateLogin}
-        onSubmit={(values, {}) => {
+        onSubmit={(values, { }) => {
           let email = values.email;
           let senha = values.senha;
           handleLogin(email, senha);
@@ -106,7 +106,7 @@ const Login = () => {
               </TouchableOpacity>
 
               <Text style={styles.labelCadastro}>
-                Ainda não possui cadastro? Crie um 
+                Ainda não possui cadastro? Crie um
                 <Text onPress={handleSubmitCadastro} style={styles.labelBold}>
                   {' '}
                   clicando aqui

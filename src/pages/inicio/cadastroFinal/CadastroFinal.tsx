@@ -85,7 +85,7 @@ export default function () {
         initialValues={{}}
         validationSchema={ValidateCadastroFone}
         onSubmit={async (values, { setErrors }) => {
-          usuarioById = await findById(usuarioCriado);
+          // usuarioById = await findById(usuarioCriado);
           const usuarioCadastrado = await atualizarUsuario(usuarioCriado, latitude.toString(), longitude.toString(), location, EmpregosSelecionados);
           if (!!usuarioCadastrado) {
             setMensagemModal('Cadastrado com sucesso!')

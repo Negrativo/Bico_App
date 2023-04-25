@@ -2,15 +2,19 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 export type propsNavigationStack = {
   Home: undefined;
-  TelaInicial: undefined;
+  TipoCadastro: undefined;
   Login: undefined;
-  CadastroInicial: undefined;
+  CadastroInicial: TipoCadastroParams;
   CadastroFinal: CadastroFinalParams;
   CategoriaServico: undefined;
   ListaServicos: ListaServicosParams;
   AgendamentoServico: AgendamentoServicoParams;
   Perfil: undefined;
 };
+
+export interface TipoCadastroParams {
+  isCadastroProfissional: Boolean;
+}
 
 export interface CadastroFinalParams {
   usuarioId: String;

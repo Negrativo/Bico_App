@@ -3,8 +3,8 @@ import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal';
 import { Formik } from 'formik';
 import styles from './StyleCadastroInicial';
-import { propsStack } from '../../../routes/stack/models/model';
-import { useNavigation } from '@react-navigation/native';
+import { TipoCadastroParams, propsStack } from '../../../routes/stack/models/model';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { Button } from 'react-native';
 import { cadastrarUsuario } from '../../../service/usuarioService/UsuarioService';
 import MaskInput, { Masks } from 'react-native-mask-input';
@@ -14,6 +14,9 @@ import ValidateCadastro from '../../../components/schema/CadastroSchema';
 export default function ({ }) {
   const logo = require('../../../../assets/BICO-3.png');
   const navigation = useNavigation<propsStack>();
+  const params = useRoute();
+  const tipoCadastro: TipoCadastroParams = params.params as unknown as TipoCadastroParams;
+
   const [mensagemModal, setMensagemModal] = useState('');
   const [isModalVisible, setModalVisible] = useState(false);
 
@@ -37,7 +40,11 @@ export default function ({ }) {
           const senha = values.senha;
           if (nome.length > 0 && email.length > 0 && senha.length > 0) {
             const usuarioCriado = await cadastrarUsuario(nome, email, telefone, senha);
-            navigation.navigate('CadastroFinal', { usuarioId: usuarioCriado });
+            if (tipoCadastro.isCadastroProfissional === true) {
+              navigation.navigate('CadastroFinal', { usuarioId: usuarioCriado });
+            } else {
+              navigation.navigate('Login');
+            }
           }
         }}
       >
