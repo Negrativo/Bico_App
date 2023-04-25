@@ -25,7 +25,7 @@ export default function () {
         <View style={styles.formCabecalhoPerfil}>
           <Text style={styles.textNome}>{user?.nome}</Text>
         </View>
-        <Text>__________________________</Text>
+        <Text style={styles.Text}>__________________________</Text>
         <View style={styles.scrollContainer}>
           <View style={styles.formBottons}>
             <TouchableOpacity style={styles.buttonCadastro} onPress={() => EditarUser()}>

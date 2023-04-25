@@ -130,7 +130,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     textTransform: 'uppercase',
-    margin: 5
+    margin: 5,
+    color: '#000000'
   },
 
   textCadastrar: {
@@ -139,7 +140,8 @@ const styles = StyleSheet.create({
 
   textPesquisaEmprego: {
     fontSize: 14,
-    margin: 5
+    margin: 5,
+    color: '#000000'
   },
 
   textAdicionarEndereco: {

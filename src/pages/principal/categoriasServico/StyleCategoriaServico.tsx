@@ -13,7 +13,8 @@ const styles = StyleSheet.create({
   textoCategorias: {
     fontSize: 30,
     fontWeight: 'bold',
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
+    color: '#000000'
   },
   containerPesquisa: {
     backgroundColor: '#FFFFFF',

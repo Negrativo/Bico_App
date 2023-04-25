@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
   },
   Text: {
     fontSize: 18,
+    color: '#000000'
   },
   textoCategorias: {
     fontSize: 22,
@@ -36,7 +37,6 @@ const styles = StyleSheet.create({
   barraPesquisa: {
     backgroundColor: '#FFFFFF',
     width: 290,
-    marginVertical: 5
   },
   imagem: {
     resizeMode: "cover",

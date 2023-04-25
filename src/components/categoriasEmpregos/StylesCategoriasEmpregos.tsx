@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
 
   Texto: {
     fontSize: 18,
-    textAlign: 'center'
+    textAlign: 'center',
+    color: '#000000'
   },
 
   fotoCategoria: {

@@ -48,11 +48,13 @@ const styles = StyleSheet.create({
   textNome: {
     fontSize: 24,
     fontWeight: "bold",
-    margin: 5
+    margin: 5,
+    color: '#000000'
   },
 
   textGeral: {
     fontSize: 16,
+    color: '#000000'
   },
 
   textHoraSelecionada: {

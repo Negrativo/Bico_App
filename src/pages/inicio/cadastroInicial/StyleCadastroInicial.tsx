@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     justifyContent: 'center',
     alignItems: 'center',
+    color: '#000000'
   },
 
   button: {
@@ -77,6 +78,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 10,
     paddingHorizontal: 10,
+    color: '#000000'
   },
 
   labelBold: {
@@ -86,6 +88,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 10,
     textDecorationLine: 'underline',
+    color: '#000000'
   },
 
   errors: {

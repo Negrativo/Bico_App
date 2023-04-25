@@ -44,7 +44,6 @@ export default function () {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.formBarraPesquisa}>
-        <MaterialCommunityIcons name='home' color={'#EDEDED'} size={26} />
         <TextInput
           style={styles.barraPesquisa}
           textAlign="left"
