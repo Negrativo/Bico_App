@@ -11,7 +11,7 @@ import { propsStack } from '../../../routes/stack/models/model';
 import { useUser } from '../../../context/AuthContext';
 
 const Login = () => {
-  const video = require('../../../../assets/fundofinal.mp4');
+  //const video = require('../../../../assets/fundofinal.mp4');
   const logo = require('../../../../assets/BICO-3.png');
   const navigation = useNavigation<propsStack>();
   const { user, LoginUser } = useUser();
@@ -40,7 +40,7 @@ const Login = () => {
         {props => (
           <View style={styles.image}>
             <Video
-              source={video}
+              source={require('../../../../assets/fundofinal.mp4')}
               style={styles.video}
               resizeMode="cover"
               repeat={true}

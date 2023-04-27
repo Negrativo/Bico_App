@@ -10,6 +10,7 @@ export type propsNavigationStack = {
   ListaServicos: ListaServicosParams;
   AgendamentoServico: AgendamentoServicoParams;
   Perfil: undefined;
+  SolicitacoesServico: undefined;
 };
 
 export interface TipoCadastroParams {

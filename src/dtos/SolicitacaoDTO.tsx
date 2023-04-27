@@ -1,6 +1,7 @@
 export interface SolicitacaoDTO {
+  usuarioSolicitante: string;
   servico: string,
-  diaSolicitado: string,
+  diaSelecionado: string,
   horarioSolicitado: string,
   observacao: string,
   latitude: string,

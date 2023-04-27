@@ -10,15 +10,19 @@ import { useRoute, useNavigation } from '@react-navigation/native';
 import { propsStack, AgendamentoServicoParams } from '../../../routes/stack/models/model';
 import { SolicitacaoDTO } from '../../../dtos/SolicitacaoDTO';
 import { solicitarServico } from '../../../service/solicitacaoService/solicitacaoService';
+import { useUser } from '../../../context/AuthContext';
 
 export default function () {
   Geocoder.init(GOOGLE_API_KEY);
   const [horaAgendamento, setHoras] = useState('00:00');
   const [mostraSelecaoHorario, setSelecaoHorario] = useState(false);
+  const [diaSelecionado, setDiaSelecionado] = useState();
   const [location, setLocation] = useState("");
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
+  const [observacao, setObservacao] = useState("");
 
+  const { user } = useUser();
   const params = useRoute();
   const servicoSelecionado: AgendamentoServicoParams = params.params as unknown as AgendamentoServicoParams;
 
@@ -60,19 +64,21 @@ export default function () {
   };
 
   const solicitar = () => {
-    console.log("solicitando");
     //TO DO - criar processo para pegar dia selecionado calendario
+    const usuarioSolicitante = !!user ? user.id : "";
     const servico = servicoSelecionado.servicoSelecionado;
-    const solicitacaoDTO = {
+    const latitudeString = latitude.toString();
+    const longitudeString = longitude.toString();
+    const solicitacaoDTO: SolicitacaoDTO = {
+      usuarioSolicitante,
       servico,
-      diaSolicitado: '01-01-2023',
-      horaAgendamento,
-      observacao: "observacao",
-      latitude,
-      longitude,
-      location
-    } as unknown as SolicitacaoDTO;
-    console.log(solicitacaoDTO);
+      diaSelecionado: "2023-04-25",
+      horarioSolicitado: horaAgendamento,
+      observacao,
+      latitude: latitudeString,
+      longitude: longitudeString,
+      endereco: location
+    };
     solicitarServico(solicitacaoDTO);
   }
 
@@ -82,7 +88,9 @@ export default function () {
         <Text style={styles.textNome}>{servicoSelecionado.servicoSelecionado}</Text>
         <View style={styles.viewCalendario}>
           <Text style={styles.textGeral}>Qual dia gostaria de agendar:</Text>
-          <CalendarioComponent></CalendarioComponent>
+          <CalendarioComponent
+            diaSelecionado={setDiaSelecionado}
+          ></CalendarioComponent>
         </View>
         <View style={styles.viewHorario}>
           <Text style={styles.textGeral}>Qual o melhor horário para a realização do serviço:</Text>
@@ -108,13 +116,15 @@ export default function () {
               placeholder={"Observação"}
               placeholderTextColor={"#FFFFFF"}
               maxLength={200}
+              onChangeText={setObservacao}
             />
           </View>
         </View>
         <View style={styles.formEndereco}>
           <Text style={styles.textGeral}>Selecione o endereço para realização do serviço:</Text>
           <View style={styles.formInputObservacao}>
-            <TextInput style={styles.textEndereco}
+            <TextInput
+              style={styles.textEndereco}
               multiline={false}
               placeholder={"Adicionar endereço"}
               placeholderTextColor={"#FFFFFF"}

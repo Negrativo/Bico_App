@@ -3,8 +3,9 @@ import { View } from 'react-native';
 import moment from 'moment';
 import styles from './StyleCalendarioComponent';
 import { Calendar, DateData, LocaleConfig } from 'react-native-calendars';
+import { CalendarioComponentProps } from './CalendarioComponentProps';
 
-export default function () {
+export default function (props: CalendarioComponentProps) {
   const _format = 'YYYY-MM-DD';
   const _today = moment().format(_format);
   const [markedDates, setMarkedDates] = useState({ [_today]: {} })
@@ -29,6 +30,7 @@ export default function () {
     const updatedMarkedDates = { ...markedDates, ...{ [_selectedDay]: { marked } } }
 
     setMarkedDates(updatedMarkedDates);
+    props.diaSelecionado(markedDates);
   }
 
   return (

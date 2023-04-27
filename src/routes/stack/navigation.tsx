@@ -9,6 +9,7 @@ import { propsNavigationStack } from './models/model';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import BottomTabs from './ButtomTabs';
 import { useUser } from '../../context/AuthContext';
+import SolicitacoesServico from '../../pages/principal/solicitacoesServico/SolicitacoesServico';
 
 const {Navigator, Screen} = createNativeStackNavigator<propsNavigationStack>();
 
@@ -29,6 +30,7 @@ export default function () {
           />
           <Screen name="ListaServicos" component={ListaServicos} />
           <Screen name="AgendamentoServico" component={AgendamentoServico} />
+          <Screen name='SolicitacoesServico' component={SolicitacoesServico} />
         </>
       ) : (
         <>

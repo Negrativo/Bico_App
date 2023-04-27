@@ -1,18 +1,21 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, ImageBackground, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 
 import styles from './StylePerfil';
 import { useUser } from '../../../context/AuthContext';
+import { useNavigation } from '@react-navigation/native';
+import { propsStack } from '../../../routes/stack/models/model';
 
 export default function () {
   const { user, setUser } = useUser();
+  const navigation = useNavigation<propsStack>();
 
   function EditarUser(): void {
     throw new Error('Function not implemented.');
   }
 
   function solicitacaoUser(): void {
-    throw new Error('Function not implemented.');
+    navigation.navigate('SolicitacoesServico');
   }
 
   function logoutUser(): void {
