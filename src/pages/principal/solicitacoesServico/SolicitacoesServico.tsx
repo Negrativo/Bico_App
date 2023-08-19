@@ -5,6 +5,7 @@ import styles from './StyleSolicitacoesServico';
 import { getSolicitacoesByUsuario } from '../../../service/solicitacaoService/solicitacaoService';
 import { useUser } from '../../../context/AuthContext';
 import { ServicoDoUsuarioDTO } from '../../../dtos/ServicoDoUsuarioDTO';
+import SolicitacaoServico from '../../../components/solicitacaoServico/SolicitacaoServicoComponent';
 
 export default function () {
   const [dadosLista, setDados] = useState<ServicoDoUsuarioDTO[]>();
@@ -39,21 +40,17 @@ export default function () {
           <FlatList
             showsVerticalScrollIndicator={false}
             data={dadosLista}
-            keyExtractor={dadosLista => dadosLista.toString()}
+            keyExtractor={dadosLista => dadosLista.usuarioSolicitante}
             renderItem={({ item }) => (
-              <>
-                <View>
-                  <Text>
-                    {item.servico}
-                  </Text>
-                  <Text>
-                    {item.horarioSolicitado}
-                  </Text>
-                  <Text>
-                    {item.usuarioSolicitante}
-                  </Text>
-                </View>
-              </>
+              <SolicitacaoServico
+                usuarioSolicitante={item.usuarioSolicitante}
+                servico={item.servico}
+                diaSelecionado={item.diaSelecionado}
+                horarioSolicitado={item.horarioSolicitado}
+                observacao={item.observacao}
+                endereco={item.endereco}
+                onPress={() => { }}
+              />
             )}
           />
           :
