@@ -12,7 +12,7 @@ import { CadastroFinalParams, propsStack } from '../../../routes/stack/models/mo
 import { GOOGLE_API_KEY } from '../../../../environments';
 import { empregos } from '../../../data/empregos';
 import Modal from 'react-native-modal';
-import { atualizarUsuario, findById } from '../../../service/usuarioService/UsuarioService';
+import { atualizarUsuario } from '../../../service/usuarioService/UsuarioService';
 import { UsuarioByIdDTO } from '../../../dtos/UsuarioByIdDTO';
 
 export default function () {

@@ -11,6 +11,6 @@ export async function onSignOut() {
 export async function UserSignedIn() {
   const user = await storage.getItem('USER');
   if (user) {
-    return user;
+    return JSON.parse(user);
   }
 }

@@ -40,7 +40,7 @@ export default function () {
           <FlatList
             showsVerticalScrollIndicator={false}
             data={dadosLista}
-            keyExtractor={dadosLista => dadosLista.usuarioSolicitante}
+            keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
               <SolicitacaoServico
                 usuarioSolicitante={item.usuarioSolicitante}

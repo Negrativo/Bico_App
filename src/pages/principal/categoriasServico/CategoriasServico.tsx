@@ -1,11 +1,10 @@
-import { useNavigation } from '@react-navigation/native';
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { View, Image, Text, TextInput, FlatList, SafeAreaView } from 'react-native';
-import CategoriasEmpregosComponent from '../../../components/categoriasEmpregos/CategoriasEmpregosComponent';
 import { propsStack } from '../../../routes/stack/models/model';
-import styles from './StyleCategoriaServico';
 import { empregos } from '../../../data/empregos';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import CategoriasEmpregosComponent from '../../../components/categoriasEmpregos/CategoriasEmpregosComponent';
+import styles from './StyleCategoriaServico';
 
 export default function () {
   const iconPesquisa = require('../../../../assets/pesquisar.png');

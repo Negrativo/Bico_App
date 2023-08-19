@@ -40,10 +40,12 @@ export default function ({ }) {
           const senha = values.senha;
           if (nome.length > 0 && email.length > 0 && senha.length > 0) {
             const usuarioCriado = await cadastrarUsuario(nome, email, telefone, senha);
-            if (tipoCadastro.isCadastroProfissional === true) {
-              navigation.navigate('CadastroFinal', { usuarioId: usuarioCriado });
-            } else {
-              navigation.navigate('Login');
+            if (usuarioCriado != "") {
+              if (tipoCadastro.isCadastroProfissional === true) {
+                navigation.navigate('CadastroFinal', { usuarioId: usuarioCriado });
+              } else {
+                navigation.navigate('Login');
+              }
             }
           }
         }}

@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, TextInput, SafeAreaView, ScrollView } from 'react-native';
-import DateTimePicker from '@react-native-community/datetimepicker'
-import Local from '@react-native-community/geolocation';
-import Geocoder from 'react-native-geocoding';
 import { GOOGLE_API_KEY } from '../../../../environments';
-import styles from './StyleAgendamentoServico';
-import CalendarioComponent from '../../../components/calendario/CalendarioComponent';
-import { useRoute, useNavigation } from '@react-navigation/native';
-import { propsStack, AgendamentoServicoParams } from '../../../routes/stack/models/model';
+import { useRoute } from '@react-navigation/native';
+import { AgendamentoServicoParams, propsStack } from '../../../routes/stack/models/model';
 import { SolicitacaoDTO } from '../../../dtos/SolicitacaoDTO';
 import { solicitarServico } from '../../../service/solicitacaoService/solicitacaoService';
 import { useUser } from '../../../context/AuthContext';
+import { useNavigation } from '@react-navigation/native';
+import CalendarioComponent from '../../../components/calendario/CalendarioComponent';
+import DateTimePicker from '@react-native-community/datetimepicker'
+import Local from '@react-native-community/geolocation';
+import Geocoder from 'react-native-geocoding';
+import styles from './StyleAgendamentoServico';
+import Toast from 'react-native-toast-message';
 
 export default function () {
   Geocoder.init(GOOGLE_API_KEY);
+  const navigation = useNavigation<propsStack>();
   const [horaAgendamento, setHoras] = useState('00:00');
   const [mostraSelecaoHorario, setSelecaoHorario] = useState(false);
   const [diaSelecionado, setDiaSelecionado] = useState();
@@ -41,9 +44,22 @@ export default function () {
             const _location = addressJson.results[0].formatted_address;
             setLocation(_location);
           })
-          .catch(error => console.warn(error));
+          .catch(error => {
+            Toast.show({
+              type: 'error',
+              text1: 'Erro ao buscar localização',
+              text2: 'Verifique se a localização do aparelho esta habilitada e o BICO tem permissão.',
+              visibilityTime: 8000,
+            });
+          });
       },
       (error) => {
+        Toast.show({
+          type: 'error',
+          text1: 'Erro ao buscar localização',
+          text2: 'Verifique se a localização do aparelho esta habilitada e o BICO tem permissão.',
+          visibilityTime: 8000,
+        });
         console.log('Error location: ' + error);
       },
       {
@@ -63,23 +79,29 @@ export default function () {
     setSelecaoHorario(!mostraSelecaoHorario);
   };
 
-  const solicitar = () => {
+  const solicitar = async () => {
     //TO DO - criar processo para pegar dia selecionado calendario
-    const usuarioSolicitante = !!user ? user.id : "";
-    const servico = servicoSelecionado.servicoSelecionado;
-    const latitudeString = latitude.toString();
-    const longitudeString = longitude.toString();
-    const solicitacaoDTO: SolicitacaoDTO = {
-      usuarioSolicitante,
-      servico,
-      diaSelecionado: "2023-04-25",
-      horarioSolicitado: horaAgendamento,
-      observacao,
-      latitude: latitudeString,
-      longitude: longitudeString,
-      endereco: location
-    };
-    solicitarServico(solicitacaoDTO);
+    if (!!user) {
+      const usuarioSolicitante = user.id;
+      const servico = servicoSelecionado.servicoSelecionado;
+      const latitudeString = latitude.toString();
+      const longitudeString = longitude.toString();
+      const solicitacaoDTO: SolicitacaoDTO = {
+        usuarioSolicitante,
+        servico,
+        diaSelecionado: "2023-04-25",
+        horarioSolicitado: horaAgendamento,
+        observacao,
+        latitude: latitudeString,
+        longitude: longitudeString,
+        endereco: location
+      };
+      const isSucess = await solicitarServico(solicitacaoDTO);
+      if (isSucess === true) {
+        navigation.navigate('Home');
+      }
+    }
+
   }
 
   return (

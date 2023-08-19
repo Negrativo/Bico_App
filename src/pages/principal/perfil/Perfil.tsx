@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { propsStack } from '../../../routes/stack/models/model';
 
 export default function () {
-  const { user, setUser } = useUser();
+  const { user, setUser, LogoutUser } = useUser();
   const navigation = useNavigation<propsStack>();
 
   function EditarUser(): void {
@@ -19,7 +19,7 @@ export default function () {
   }
 
   function logoutUser(): void {
-    setUser(null);
+    LogoutUser();
   }
 
   return (

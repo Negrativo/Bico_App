@@ -9,19 +9,24 @@ export default function SolicitacaoServico(props: SolicitacaoServicoProps) {
       {props?.usuarioSolicitante &&
         <View style={styles.containerView}>
           <TouchableOpacity onPress={props.onPress} style={styles.container}>
-            <View>
+            <View style={styles.alinhamentoTexto}>
+              <Text style={styles.textoNegrito}>Usuario solicitante: </Text>
               <Text style={styles.Texto}>{props?.usuarioSolicitante}</Text>
             </View>
-            <View>
+            <View style={styles.alinhamentoTexto}>
+              <Text style={styles.textoNegrito}>Usuario solicitante:</Text>
               <Text style={styles.Texto}>{props?.servico}</Text>
             </View>
-            <View>
+            <View style={styles.alinhamentoTexto}>
+              <Text style={styles.textoNegrito}>Dia solicitado: </Text>
               <Text style={styles.Texto}>{props?.diaSelecionado}</Text>
             </View>
-            <View>
+            <View style={styles.alinhamentoTexto}>
+              <Text style={styles.textoNegrito}>Horário solicitado:</Text>
               <Text style={styles.Texto}>{props?.horarioSolicitado}</Text>
             </View>
-            <View>
+            <View style={styles.alinhamentoTexto}>
+              <Text style={styles.textoNegrito}>Endereço: </Text>
               <Text style={styles.Texto}>{props?.endereco}</Text>
             </View>
           </TouchableOpacity>
