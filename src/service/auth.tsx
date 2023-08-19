@@ -5,7 +5,12 @@ export async function onSignIn(user: any) {
 }
 
 export async function onSignOut() {
-  storage.removeItem("USER");
+  const user = await storage.removeItem("USER")
+  if (user == null) {
+    return true
+  } else {
+    return false
+  }
 }
 
 export async function UserSignedIn() {

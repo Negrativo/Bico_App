@@ -42,8 +42,11 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   }
 
   const LogoutUser = () => {
-    setUser(null);
-    onSignOut();
+    onSignOut().then(hasUser => {
+      if (hasUser) {
+          setUser(null);
+      }
+    })
   }
 
   const value = { user, setUser, LoginUser, LogoutUser };

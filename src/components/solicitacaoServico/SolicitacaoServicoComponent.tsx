@@ -14,7 +14,7 @@ export default function SolicitacaoServico(props: SolicitacaoServicoProps) {
               <Text style={styles.Texto}>{props?.usuarioSolicitante}</Text>
             </View>
             <View style={styles.alinhamentoTexto}>
-              <Text style={styles.textoNegrito}>Usuario solicitante:</Text>
+              <Text style={styles.textoNegrito}>Serviço solicitado: </Text>
               <Text style={styles.Texto}>{props?.servico}</Text>
             </View>
             <View style={styles.alinhamentoTexto}>
