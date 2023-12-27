@@ -6,9 +6,9 @@ import styles from './StyleSolicitacaoServicoComponent';
 export default function SolicitacaoServico(props: SolicitacaoServicoProps) {
   return (
     <>
-      {props?.usuarioSolicitante &&
+      {props?.usuarioSolicitante && (
         <View style={styles.containerView}>
-          <TouchableOpacity onPress={props.onPress} style={styles.container}>
+          <View style={styles.container}>
             <View style={styles.alinhamentoTexto}>
               <Text style={styles.textoNegrito}>Usuario solicitante: </Text>
               <Text style={styles.Texto}>{props?.usuarioSolicitante}</Text>
@@ -29,9 +29,21 @@ export default function SolicitacaoServico(props: SolicitacaoServicoProps) {
               <Text style={styles.textoNegrito}>Endereço: </Text>
               <Text style={styles.Texto}>{props?.endereco}</Text>
             </View>
-          </TouchableOpacity>
+          </View>
+          <View style={styles.containerBotoes}>
+            <TouchableOpacity
+              style={styles.botao}
+              onPress={props.onPressAceite}>
+              <Text style={styles.textoBotao}>Aceitar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.botao}
+              onPress={props.onPressRecusar}>
+              <Text style={styles.textoBotao}>Recusar</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      }
+      )}
     </>
-  )
+  );
 }

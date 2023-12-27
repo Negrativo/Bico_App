@@ -31,17 +31,18 @@ export default function () {
     };
   }, [user, mounted]);
 
+  const aceite = () => {};
+
   return (
     <View style={styles.container}>
       <Text>Solicitações de serviços</Text>
       <View>
-        {(!!dadosLista?.length && dadosLista?.length > 0)
-          ?
+        {!!dadosLista?.length && dadosLista?.length > 0 ? (
           <FlatList
             showsVerticalScrollIndicator={false}
             data={dadosLista}
             keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
+            renderItem={({item}) => (
               <SolicitacaoServico
                 usuarioSolicitante={item.usuarioSolicitante}
                 servico={item.servico}
@@ -49,15 +50,16 @@ export default function () {
                 horarioSolicitado={item.horarioSolicitado}
                 observacao={item.observacao}
                 endereco={item.endereco}
-                onPress={() => { }}
+                onPressAceite={() => aceite}
+                onPressRecusar={() => aceite}
               />
             )}
           />
-          :
+        ) : (
           <View>
             <Text style={styles.Text}>Nenhuma solicitação no momento</Text>
           </View>
-        }
+        )}
       </View>
     </View>
   );

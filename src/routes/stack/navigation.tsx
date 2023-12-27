@@ -1,5 +1,5 @@
 import React from 'react';
-import Login from '../../pages/inicio/login/Login';
+import Login from '../../pages/inicio/login/login';
 import CadastroInicial from '../../pages/inicio/cadastroInicial/CadastroInicial';
 import CadastroFinal from '../../pages/inicio/cadastroFinal/CadastroFinal';
 import TipoCadastro from '../../pages/inicio/tipoCadastro/TipoCadastro';

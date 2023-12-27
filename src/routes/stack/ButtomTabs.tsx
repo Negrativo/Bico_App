@@ -6,6 +6,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import Perfil from '../../pages/principal/perfil/Perfil';
 import CategoriasServico from '../../pages/principal/categoriasServico/CategoriasServico';
 import { propsNavigationStack } from './models/model';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const { Navigator, Screen } = createMaterialBottomTabNavigator<propsNavigationStack>();
 

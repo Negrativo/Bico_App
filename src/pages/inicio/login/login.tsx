@@ -3,7 +3,7 @@ import React from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
 import Video from 'react-native-video';
 import { Formik } from 'formik';
-import styles from './StyleLogin';
+import styles from './styleLogin';
 
 import ValidateLogin from '../../../components/schema/LoginSchema';
 import { useNavigation } from '@react-navigation/native';
